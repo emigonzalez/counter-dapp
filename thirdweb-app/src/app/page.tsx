@@ -1,28 +1,7 @@
 "use client"
 import { ConnectButton, useReadContract, useSendTransaction } from "thirdweb/react";
-import { client } from "./client";
-import { getContract, prepareContractCall } from "thirdweb";
-import { defineChain } from "thirdweb/chains";
-
-const myChain = defineChain({
-  id: 31337,
-  rpc: "http://127.0.0.1:8545/",
-  nativeCurrency: {
-    name: "Ether",
-    symbol: "ETH",
-    decimals: 18,
-  },
-  testnet: true,
-});
-
-const contract = getContract({
-  // the client you have created via `createThirdwebClient()`
-  client,
-  // the chain the contract is deployed on
-  chain: myChain,
-  // the contract's address
-  address: "0x94B75AA39bEC4cB15e7B9593C315aF203B7B847f",
-});
+import { client, contract } from "./client";
+import { prepareContractCall } from "thirdweb";
 
 export default function Home() {
   return (
