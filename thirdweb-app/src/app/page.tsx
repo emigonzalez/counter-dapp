@@ -44,10 +44,8 @@ const Counter = () => {
     params: [],
   });
 
-  return !isLoading ? (
+  return !isLoading && (
       <p>Counter: {data?.toString()}</p>
-  ) : (
-    <Spinner color="white"/>
   )
 };
 
@@ -63,29 +61,20 @@ const CounterButton = ({action, label}: {action:string,label:string}) => {
     sendTransaction(transaction);
   };
 
-  return (
+  return !isPending ? (
     <button
       className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
       onClick={onClick}
       disabled={isPending}
     >
-      {isPending ? 
-        <span>
-          <Spinner color="gray-800"/>
-          Please confirm transaction in your wallet.
-        </span>
-        :
-        <span>
-          {label}
-        </span>
-      }
+      {label}
     </button>
+  ) : (
+    <span className="text-white">
+      Please confirm transaction in your wallet.
+    </span>
   )
 };
-
-const Spinner = ({color}:{color:string}) => (
-  <svg className={`animate-spin h-5 w-5 mr-3 text-${color}`} viewBox="0 0 24 24"></svg>
-);
 
 function Header() {
   return (
