@@ -24,13 +24,13 @@ export default function Home() {
           </div>
         </div>
         <div className="flex justify-center mb-5">
-          <IncrementCounter />
+          <CounterButton action="inc" label="Increment Counter" />
         </div>
         <div className="flex justify-center mb-5">
-          <DecrementCounter />
+          <CounterButton action="dec" label="Decrement Counter" />
         </div>
         <div className="flex justify-center mb-5">
-          <ResetCounter />
+          <CounterButton action="reset" label="Reset Counter" />
         </div>
       </div>
     </main>
@@ -51,13 +51,13 @@ const Counter = () => {
   )
 };
 
-const IncrementCounter = () => {
+const CounterButton = ({action, label}: {action:string,label:string}) => {
   const { mutate: sendTransaction, isPending } = useSendTransaction();
   
   const onClick = async () => {
     const transaction = prepareContractCall({
       contract,
-      method: "function inc() public",
+      method: `function ${action}() public`,
       params: [],
     });
     sendTransaction(transaction);
@@ -76,71 +76,7 @@ const IncrementCounter = () => {
         </span>
         :
         <span>
-          Increment Counter
-        </span>
-      }
-    </button>
-  )
-};
-
-const DecrementCounter = () => {
-  const { mutate: sendTransaction, isPending } = useSendTransaction();
-  
-  const onClick = async () => {
-    const transaction = prepareContractCall({
-      contract,
-      method: "function dec() public",
-      params: [],
-    });
-    sendTransaction(transaction);
-  };
-
-  return (
-    <button
-      className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
-      onClick={onClick}
-      disabled={isPending}
-    >
-      {isPending ? 
-        <span>
-          <Spinner color="gray-800"/>
-          Please confirm transaction in your wallet.
-        </span>
-        :
-        <span>
-          Decrement Counter
-        </span>
-      }
-    </button>
-  )
-};
-
-const ResetCounter = () => {
-  const { mutate: sendTransaction, isPending } = useSendTransaction();
-  
-  const onClick = async () => {
-    const transaction = prepareContractCall({
-      contract,
-      method: "function reset() public",
-      params: [],
-    });
-    sendTransaction(transaction);
-  };
-
-  return (
-    <button
-      className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
-      onClick={onClick}
-      disabled={isPending}
-    >
-      {isPending ? 
-        <span>
-          <Spinner color="gray-800"/>
-          Please confirm transaction in your wallet.
-        </span>
-        :
-        <span>
-          Reset Counter
+          {label}
         </span>
       }
     </button>
