@@ -1,25 +1,32 @@
 ## Solidity Counter DApp
 
-### Requriements
+### Requirements
 Before you begin, you need to install the following tools:
 
 - Node (>= v18.17)
 - Yarn (v2+)
 - Git
 
-### Run hardhat testnet
+### 1. Run hardhat testnet
 
-First, run the testnet:
+Run the testnet:
 
 ```bash
 yarn install
 yarn hardhat node
 ```
-
+### 2. Set up Wallet && ThirdWeb
 Don't forget to deploy the contract and setup the testnet in thirdweb.com.
 You have to configure your wallet as well by adding the testnet and one test account with ETH.
 
-### Deploy Contract
+```
+- Chain ID: 31337
+- Chain Name: hardhat
+- RPC: "http://127.0.0.1:8545/"
+- Currency Symbol: "ETH"
+```
+
+### 3. Deploy Contract
 
 When you're ready to deploy your contracts, just run one of the following command to deploy you're contracts:
 
@@ -27,7 +34,14 @@ When you're ready to deploy your contracts, just run one of the following comman
 yarn thirdweb deploy
 ```
 
-### Run the DApp
+### 4. Set env vars
+
+Create a .env file from .env.example and set client id and contract address from thirdweb.
+
+NEXT_PUBLIC_TEMPLATE_CLIENT_ID=
+NEXT_PUBLIC_CONTRACT_ADDRESS=
+
+### 5. Run the DApp
 
 To run the app, execute the followings commands:
 
